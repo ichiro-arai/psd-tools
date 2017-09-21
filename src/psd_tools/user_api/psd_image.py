@@ -257,7 +257,7 @@ class _VisibleLayer(_RawLayer):
                 bbox.x1, bbox.y1, self.visible, self.mask, self.effects))
 
 
-class AdjustmentLayer(_RawLayer):
+class AdjustmentLayer(_VisibleLayer):
     """PSD adjustment layer wrapper."""
     def __init__(self, parent, index):
         super(AdjustmentLayer, self).__init__(parent, index, 'adjustment')
