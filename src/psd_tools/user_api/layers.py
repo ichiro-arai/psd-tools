@@ -86,6 +86,10 @@ def group_layers(decoded_data):
         else:
             if blocks.get(TaggedBlock.TYPE_TOOL_OBJECT_SETTING):
                 kind = 'type'
+            elif (TaggedBlock.SMART_OBJECT_PLACED_LAYER_DATA in blocks or
+                  TaggedBlock.PLACED_LAYER_OBSOLETE2 in blocks or
+                  TaggedBlock.PLACED_LAYER_DATA in blocks):
+                kind = 'smartobject'
             elif (TaggedBlock.VECTOR_ORIGINATION_DATA in blocks or
                   TaggedBlock.VECTOR_MASK_SETTING1 in blocks or
                   TaggedBlock.VECTOR_MASK_SETTING2 in blocks or
@@ -98,10 +102,6 @@ def group_layers(decoded_data):
             elif any([TaggedBlock.is_fill_key(key) for key in blocks.keys()]):
                 # TODO: Check if shape layer with fill keys precedes.
                 kind = 'adjustment'
-            elif (TaggedBlock.SMART_OBJECT_PLACED_LAYER_DATA in blocks or
-                  TaggedBlock.PLACED_LAYER_OBSOLETE2 in blocks or
-                  TaggedBlock.PLACED_LAYER_DATA in blocks):
-                kind = 'smartobject'
             else:
                 kind = 'pixel'
 
